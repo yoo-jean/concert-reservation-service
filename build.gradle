@@ -26,7 +26,8 @@ dependencies {
     implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j' // 로컬 MySQL 사용할 때
+    testRuntimeOnly 'com.h2database:h2'       // 테스트용 (MySQL mode)
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.12.0'
