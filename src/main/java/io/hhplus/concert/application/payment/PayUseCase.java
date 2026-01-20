@@ -37,7 +37,7 @@ public class PayUseCase {
         LocalDateTime now = LocalDateTime.now();
 
         // 2) 좌석 조회 + HELD 검증
-        SeatJpaEntity seat = seatRepo.findByDateIdAndSeatNo(dateId, seatNo)
+        SeatJpaEntity seat = seatRepo.findForUpdate(dateId, seatNo)
                 .orElseThrow(() -> new DomainException(SEAT_NOT_FOUND));
 
         if (!seat.isHeldBy(userId, now)) {
