@@ -46,4 +46,16 @@ public interface SeatJpaRepository extends JpaRepository<SeatJpaEntity, Long> {
             @Param("expiresAt") LocalDateTime expiresAt,
             @Param("now") LocalDateTime now
     );
+
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
+    @Query("""
+    UPDATE SeatJpaEntity s
+       SET s.status = io.hhplus.concert.domain.seat.SeatStatus.AVAILABLE,
+           s.heldByUserId = null,
+           s.holdExpiresAt = null
+     WHERE s.status = io.hhplus.concert.domain.seat.SeatStatus.HELD
+       AND s.holdExpiresAt < :now
+""")
+    int releaseExpired(@Param("now") LocalDateTime now);
+
 }
