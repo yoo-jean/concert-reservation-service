@@ -46,4 +46,11 @@ public class SeatJpaEntity {
         this.heldByUserId = userId;
         this.holdExpiresAt = null;
     }
+
+    public void resetToAvailableForTest() {
+        this.status = SeatStatus.AVAILABLE;
+        this.heldByUserId = null;
+        this.holdExpiresAt = null;
+    }
+
 }
